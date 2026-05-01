@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Moving Faster Than Ever — ETHOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1730;
+    --blue:#0a4a8f;
+    --blue-2:#0e5fb4;
+    --cyan:#3fd3df;
+    --teal-deep:#0f7d8a;
+    --line:#dfe6f1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+    background:transparent;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Sora","Plus Jakarta Sans",sans-serif;color:#fff;margin:0;letter-spacing:-.01em}
+  p{margin:0;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* PILL */
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:999px;
+    font-size:11.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.7}
+
+  /* REVEAL ANIMATION */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.delay-1{transition-delay:.08s}
+  .reveal.delay-2{transition-delay:.16s}
+  .reveal.delay-3{transition-delay:.24s}
+
+  /* NEWS SECTION */
+  .news{
+    background:transparent;
+    color:#e7eef8;
+    overflow:hidden;
+    position:relative;
+    padding:96px 0;
+  }
+  .news::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(900px 400px at 80% 0%, rgba(63,211,223,.10),transparent 60%),
+      radial-gradient(700px 400px at 0% 100%, rgba(10,74,143,.15),transparent 60%);
+    pointer-events:none;
+  }
+  .news h2{color:#fff}
+  .section-head{max-width:780px;margin-bottom:48px}
+  .section-head h2{font-size:42px;line-height:1.1;font-weight:700;margin:18px 0 16px;letter-spacing:-.02em}
+  .section-head p{font-size:15.5px;color:#a8b6cf;max-width:680px}
+
+  /* NEWS GRID */
+  .news-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:20px;
+  }
+  .ncard{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:24px;
+    display:flex;flex-direction:column;gap:14px;
+    position:relative;overflow:hidden;
+    transition:transform .3s, border-color .3s, background .3s;
+  }
+  .ncard:hover{
+    transform:translateY(-6px);
+    border-color:rgba(63,211,223,.45);
+    background:rgba(63,211,223,.06);
+  }
+  .ncard.featured{
+    grid-row:span 2;
+    background:linear-gradient(155deg,rgba(63,211,223,.18),rgba(10,74,143,.4));
+    border-color:rgba(63,211,223,.4);
+  }
+  .ncard .meta{
+    display:flex;align-items:center;gap:10px;
+    font-size:12px;color:#9fb1cf;letter-spacing:.04em;
+  }
+  .ncard .meta .tag{
+    background:rgba(63,211,223,.18);color:#9aeaf3;
+    padding:4px 10px;border-radius:999px;
+    font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid rgba(63,211,223,.3);
+  }
+  .ncard h3{color:#fff;font-size:18px;line-height:1.3;font-weight:600}
+  .ncard.featured h3{font-size:26px}
+  .ncard p{color:#b8c6df;font-size:14px}
+  .ncard .read{
+    margin-top:auto;color:#9aeaf3;font-weight:600;font-size:13px;
+    display:inline-flex;align-items:center;gap:8px;
+    cursor:pointer;
+  }
+  .ncard:hover .read .arr{transform:translateX(5px)}
+  .arr{display:inline-block;transition:transform .25s}
+
+  /* LIVE TAPE */
+  .news-tape{
+    margin-top:48px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:14px 20px;
+    display:flex;align-items:center;gap:18px;
+    overflow:hidden;
+  }
+  .tape-label{
+    background:#ff4757;color:#fff;padding:6px 12px;border-radius:6px;
+    font-size:11px;font-weight:800;letter-spacing:.16em;flex-shrink:0;
+    display:flex;align-items:center;gap:6px;
+  }
+  .tape-label i{
+    width:6px;height:6px;border-radius:50%;background:#fff;
+    animation:blink 1.4s infinite;
+    display:inline-block;
+  }
+  @keyframes blink{50%{opacity:.6}}
+
+  .tape-track{flex:1;overflow:hidden;position:relative;height:24px}
+  .tape-track .marquee{
+    display:flex;gap:48px;position:absolute;left:0;top:0;white-space:nowrap;
+    animation:marq 38s linear infinite;font-size:14px;color:#cdd9ee;
+  }
+  .tape-track .marquee b{color:#9aeaf3;font-weight:700}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Responsive */
+  @media(max-width:900px){
+    .news-grid{grid-template-columns:1fr 1fr}
+    .ncard.featured{grid-column:span 2;grid-row:span 1}
+  }
+  @media(max-width:600px){
+    .news-grid{grid-template-columns:1fr}
+    .ncard.featured{grid-column:auto;grid-row:auto}
+    .section-head h2{font-size:30px}
+    .wrap{padding:0 18px}
+    .news{padding:60px 0}
+  }
+</style>
+</head>
+<body>
+
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="pill" style="background:rgba(63,211,223,.15);color:#9aeaf3;border:1px solid rgba(63,211,223,.3)">
+        <span class="dot"></span> AI Moving Faster Than Ever
+      </span>
+      <h2>This Week's <span style="color:#9aeaf3">Biggest</span> Moves</h2>
+      <p>The 7-day digest from across MCMC's emerging-tech radar — research, policy, partnerships, and breakthroughs you should know about.</p>
+    </div>
+
+    <div class="news-grid">
+
+      <article class="ncard featured reveal delay-1">
+        <div class="meta"><span class="tag">Featured</span> <span>April 26, 2026</span></div>
+        <h3>Malaysia's National AI Action Plan (2026–2030) enters Phase II — focus on talent, infrastructure, and governance</h3>
+        <p>The next phase doubles down on a sovereign AI compute backbone, sectoral guardrails, and a national prompt-engineering curriculum co-developed with regulators.</p>
+        <span class="read">Read the full briefing <span class="arr">→</span></span>
+      </article>
+
+      <article class="ncard reveal delay-2">
+        <div class="meta"><span class="tag">Policy</span> <span>April 24</span></div>
+        <h3>Updated AI Ethics &amp; Usage Policy goes live across MCMC</h3>
+        <p>New transparency disclosures, model cards, and an internal review pathway for high-risk deployments.</p>
+        <span class="read">Read more <span class="arr">→</span></span>
+      </article>
+
+      <article class="ncard reveal delay-3">
+        <div class="meta"><span class="tag">Workshop</span> <span>April 22</span></div>
+        <h3>IN-PROMPT-TO-U: April cohort hits 92% completion</h3>
+        <p>Mastering Visualization wraps with 380 participants and 14 production-ready templates shipped.</p>
+        <span class="read">Read more <span class="arr">→</span></span>
+      </article>
+
+      <article class="ncard reveal delay-2">
+        <div class="meta"><span class="tag">Research</span> <span>April 20</span></div>
+        <h3>Robotics &amp; UAV pilot expands to two new agricultural districts</h3>
+        <p>Precision spraying, real-time disease detection, and crop yield modelling now live in field trials.</p>
+        <span class="read">Read more <span class="arr">→</span></span>
+      </article>
+
+      <article class="ncard reveal delay-3">
+        <div class="meta"><span class="tag">Industry</span> <span>April 18</span></div>
+        <h3>Blockchain &amp; cryptography sandbox welcomes 6 new fintech participants</h3>
+        <p>The cohort will test cross-border settlement, identity attestation, and zero-knowledge KYC patterns.</p>
+        <span class="read">Read more <span class="arr">→</span></span>
+      </article>
+
+    </div>
+
+    <div class="news-tape reveal">
+      <span class="tape-label"><i></i> LIVE</span>
+      <div class="tape-track">
+        <div class="marquee">
+          <span><b>+12%</b> AI adoption across MCMC divisions, Q1 2026</span>
+          <span><b>NEW</b> Agentic AI &amp; Advanced Analytics domain launched</span>
+          <span><b>340+</b> participants completed prompt workshops this month</span>
+          <span><b>6</b> emerging tech domains now in active R&amp;D</span>
+          <span><b>+12%</b> AI adoption across MCMC divisions, Q1 2026</span>
+          <span><b>NEW</b> Agentic AI &amp; Advanced Analytics domain launched</span>
+          <span><b>340+</b> participants completed prompt workshops this month</span>
+          <span><b>6</b> emerging tech domains now in active R&amp;D</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+  // Also trigger immediately for elements in view on load
+  setTimeout(()=>els.forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top<window.innerHeight) el.classList.add('in'); }),100);
+})();
+</script>
+</body>
+</html>
