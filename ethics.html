@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ETHOS — Ethics &amp; Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1730;
+    --ink-2:#1a2540;
+    --body:#3b4660;
+    --muted:#6b7793;
+    --bg:#eef3f9;
+    --bg-2:#f6f9fc;
+    --card:#ffffff;
+    --line:#dfe6f1;
+    --line-2:#e9eef7;
+
+    --blue:#0a4a8f;
+    --blue-2:#0e5fb4;
+    --blue-soft:#cfe1f4;
+    --cyan:#3fd3df;
+    --cyan-2:#6fe3ec;
+    --cyan-soft:#dffafd;
+    --teal-deep:#0f7d8a;
+
+    --pink:#e7c8e6;
+    --pink-ink:#7a3a78;
+    --peach:#f6d6c2;
+    --peach-ink:#9b5224;
+    --mint:#d8efd6;
+    --mint-ink:#3f7e3a;
+
+    --shadow-sm:0 1px 2px rgba(11,23,48,.06),0 4px 14px -8px rgba(11,23,48,.10);
+    --shadow:0 8px 24px -10px rgba(11,23,48,.18),0 2px 6px rgba(11,23,48,.06);
+    --shadow-lg:0 30px 60px -25px rgba(10,74,143,.35),0 12px 28px -10px rgba(11,23,48,.18);
+
+    --radius:18px;
+    --radius-lg:26px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+    color:var(--body);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Sora","Plus Jakarta Sans",sans-serif;color:var(--ink);margin:0;letter-spacing:-.01em}
+  p{margin:0;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .blue{color:var(--blue)}
+
+  /* Pill */
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:999px;
+    font-size:11.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .pill.blue{background:#dbeafe;color:#0a4a8f;border:1px solid #b9d3f3}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.7}
+
+  /* Button */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:10px;
+    font-weight:600;font-size:14.5px;
+    cursor:pointer;border:1px solid transparent;
+    transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn .arr{
+    display:inline-flex;width:22px;height:14px;
+    align-items:center;justify-content:center;
+    transition:transform .25s;
+  }
+  .btn:hover .arr{transform:translateX(4px)}
+  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 22px -10px rgba(10,74,143,.6)}
+  .btn-primary:hover{background:#0d5aa8;transform:translateY(-1px)}
+
+  /* Ethics section */
+  .ethics{
+    background:transparent;
+    padding:32px 0 90px;
+  }
+  .ethics-row{display:grid;grid-template-columns:1fr;gap:60px;align-items:start;max-width:680px}
+
+  
+    50%{opacity:1;transform:translateX(-50%) scaleX(1.1)}
+  }
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .delay-2{transition-delay:.18s}
+    50%{opacity:1;transform:translateX(-50%) scaleX(1.1)}
+  }
+  @media(max-width:900px){
+    .ethics-row{grid-template-columns:1fr}
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============== ETHICS & GOVERNANCE SECTION ============== -->
+<section class="ethics">
+  <div class="wrap">
+    <div class="ethics-row">
+
+      <!-- Text content -->
+      <div class="reveal delay-2">
+        <span class="pill blue"><span class="dot"></span> Ethics &amp; Governance</span>
+        <h2 style="font-size:42px;margin:18px 0 14px">Ethics &amp; <span class="blue">Governance</span></h2>
+        <h3 style="font-size:22px;color:var(--blue);margin-bottom:14px;font-weight:600">From Principles to Practice</h3>
+        <p style="font-size:15.5px;color:#52607c;margin-bottom:24px">Ensure responsible, transparent, and accountable use of emerging technologies. Explore governance artefacts, frameworks, regulatory guidance, and best practices that safeguard public interest, uphold trust, and support compliant innovation across the ecosystem.</p>
+        <a href="#" class="btn btn-primary">Explore More <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* Reveal on scroll */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
